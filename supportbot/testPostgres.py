@@ -13,7 +13,7 @@ try:
     with connection.cursor() as cur:
         version = cur.execute(
             'SELECT version()'
-        )
+        ).fetchone()
         print(f'Server version: {version}')
 
 except Exception as _ex:
