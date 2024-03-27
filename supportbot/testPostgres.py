@@ -11,10 +11,19 @@ try:
     )
     
     with connection.cursor() as cur:
-        version = cur.execute(
-            'SELECT version()'
-        ).fetchone()
-        print(f'Server version: {version}')
+        cur.execute(
+            'SELECT version();'
+        )
+        print(f'Server version: {cur.fetchone()}')
+
+    with connection.cursor() as cur:
+        cur.execute('CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY NOT NULL, username varchar(100) NOT NULL)')
+        connection.commit()
+        
+    with connection.cursor() as cur:
+        cur.execute("INSERT INTO users VALUES ('1233112331', '12331vlad')")
+        cur.execute('SELECT * FROM users')
+        print(cur.fetchall())
 
 except Exception as _ex:
     print('[ERROR] POSTRGE ERROR: ', _ex)

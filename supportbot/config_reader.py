@@ -5,6 +5,7 @@ from pydantic import SecretStr, Json, ValidationError
 
 
 class Settings(BaseSettings):
+    main_chat_id: int
     bot_token: SecretStr
     admins: Json
 
